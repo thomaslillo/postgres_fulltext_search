@@ -7,31 +7,36 @@ from os import listdir
 from os.path import isfile, join
 import re
 
-# dir where the files sit
-path = config.configs['sampledir']
+class PostgresETL:
 
-# get a list of all the files
-files = [[f, join(path,f)] for f in listdir(path) if isfile(join(path,f))]
+    def init(self):
+        # dir where the files sit
+        self.path = config.configs['sampledir']        
 
-# Create Dataframe
-df = pd.DataFrame(files, columns=['FileName','FilePath'])
+    def createDF(self):
+        # get a list of all the files
+        files = [[f, join(self.path,f)] for f in listdir(self.path) if isfile(join(self.path,f))]
 
-# parse out date and company into column
-df['Company'] = df['FileName'].str.extract(r'^\d+.\s(.*)\s[A-Z]{1}[a-z]{2}\s\d+\s\d{4}.txt')
-df['Date'] = df['FileName'].str.extract(r'^\d+.\s.*\s([A-Z]{1}[a-z]{2}\s\d+\s\d{4}).txt')
+        # Create Dataframe
+        self.df = pd.DataFrame(files, columns=['FileName','FilePath'])
 
-print(df.head)
+        # parse out date and company into column
+        self.dfdf['Company'] = self.dfdf['FileName'].str.extract(r'^\d+.\s(.*)\s[A-Z]{1}[a-z]{2}\s\d+\s\d{4}.txt')
+        self.dfdf['Date'] = self.dfdf['FileName'].str.extract(r'^\d+.\s.*\s([A-Z]{1}[a-z]{2}\s\d+\s\d{4}).txt')
 
-# for all the text files in a folder
-# with open("",r)
+    # for all the text files in a folder
+    # with open("",r)
 
-# Import the Text File
+    # Import the Text File
 
 
-# create the company name and data columns from the name
+    # create the company name and data columns from the name
 
-# read all the contents of the file into the full_text column
+    # read all the contents of the file into the full_text column
 
-# append the file to a dataframe
+    # append the file to a dataframe
 
-# write the full dataframe to a csv - to go into postgress
+    # write the full dataframe to a csv - to go into postgress
+
+if __name__ == '__main__':
+    pg = PostgresETL()
